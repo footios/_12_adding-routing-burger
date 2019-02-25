@@ -24,6 +24,12 @@ class Checkout extends Component {
             bacon: 1
         }
      }
+     
+     componentDidMount() {
+         console.log(this.props);
+         
+     }
+     
     render() { 
 
         return ( 
