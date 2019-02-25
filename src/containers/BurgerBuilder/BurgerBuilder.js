@@ -118,7 +118,19 @@ class BurgerBuilder extends Component {
     //   .post("/orders.json", order)
     //   .then(response => this.setState({ loading: false, purchasing: false }))
     //   .then(error => this.setState({ loading: false, purchasing: false }));
-    this.props.history.push('/checkout')
+    const queryParams = []
+    // get the ingredients and store them in an array
+    for (const i in this.state.ingredients) {
+      if (this.state.ingredients.hasOwnProperty(i)) {
+        queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
+      }
+    }
+    // save the ingredients as a string and pass assing it to the search query
+    const queryString = queryParams.join('&')
+    this.props.history.push({
+      pathname: '/checkout',
+      search: '?' + queryString 
+    })
   };
 
   render() {

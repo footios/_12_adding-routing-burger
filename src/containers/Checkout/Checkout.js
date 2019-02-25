@@ -24,6 +24,18 @@ class Checkout extends Component {
             bacon: 1
         }
      }
+
+     // After passing the ingredients to the search query in BurgerBuilder
+    // now we need to parse them in the Checkout
+    componentDidMount() {
+        const query = new URLSearchParams(this.props.location.search)
+        const ingredients = {}
+        for (const param of query.entries()) {
+            ingredients[param[0]] = +param[1]
+        }
+        this.setState({ingredients: ingredients})
+    }
+
      checkoutCancelledHandler = () => {
          this.props.history.goBack()
      }
