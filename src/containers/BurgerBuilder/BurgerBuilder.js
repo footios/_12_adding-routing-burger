@@ -92,32 +92,7 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     // alert("You continue!");
-// We comment everything out because we don't want to 
-// store everything to Firebase immediately. 
-    // this.setState({ loading: true });
-    // //Let's send an order:
-    // // Note: In real world apps, you wouldn't do the calculation on the page,
-    // // but on the server. Otherwise the client could manipulate them.
-    // const order = {
-    //   ingredinets: this.state.ingredients,
-    //   price: this.state.totalPrice,
-    //   customer: {
-    //     name: "Foti",
-    //     address: {
-    //       street: "testStreet 1",
-    //       zipCode: "2356",
-    //       country: "Greece"
-    //     },
-    //     email: "test@otest.com"
-    //   },
-    //   deliveryMethod: "fastest"
-    // };
 
-    // // especially for firebase, we add .json
-    // axios
-    //   .post("/orders.json", order)
-    //   .then(response => this.setState({ loading: false, purchasing: false }))
-    //   .then(error => this.setState({ loading: false, purchasing: false }));
     const queryParams = []
     // get the ingredients and store them in an array
     for (const i in this.state.ingredients) {
@@ -125,6 +100,8 @@ class BurgerBuilder extends Component {
         queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
       }
     }
+    // We need the price for the Checkout. So we push it here:
+    queryParams.push('price=' + this.state.totalPrice)
     // save the ingredients as a string and pass assing it to the search query
     const queryString = queryParams.join('&')
     this.props.history.push({
