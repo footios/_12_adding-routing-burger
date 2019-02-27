@@ -16,7 +16,7 @@ class App extends Component {
             {/* With just 'exact' the order doesn't matter, but with Switch it does! */}
             {/* The 'exact' in the Route with path='/checkout' was preventing the ContactData to render */}
             <Route path='/checkout' component={Checkout} />
-            <Route path='/orders' component={Orders} />
+            <Route path='/orders' exact component={Orders} />
             <Route path='/' exact component={BurgerBuilder} />
           </Switch>
         </Layout>
