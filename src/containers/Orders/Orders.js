@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import Order from '../../components/Order/Order'
 import axios from "../../axios-orders";
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
-//import Order from '../../components/Order/Order';
 
 class Orders extends Component {
     state = { 
@@ -16,19 +15,36 @@ class Orders extends Component {
         axios.get('/orders.json')
             .then(res => {
                 console.log(res.data) // Why is 'data' what we get back from Firebase?
-                //convert the object into an array:
-                    const fetchedOrders = []
-                for (const key in res.data) {
-                    if (res.data.hasOwnProperty(key)) {
-                       fetchedOrders.push({...res.data[key], id: key});
-                        
-                    }
-                }
-                this.setState({loading: false, orders: fetchedOrders})
+                
+                this.setState({loading: false, orders: res.data})
             })
             .catch(err => {
                 this.setState({loading: false})
             })
+    }
+
+    ordersMethod = () => {
+        console.log('ordersMethod', Object.entries(this.state.orders));
+        // returns and array where each element is an order.
+        // Each order is an array which has as its first element the 'id'
+        // (that's why:  key={order[0].key})  
+        // and as second element, the rest...
+        // e.g.:
+        // [0] -LZjuuLT0gBWB4WL8y7W
+        // [1]
+        //  customer: {...}
+        //      deliveryMethod: "fastest"
+        //  ingredients: {...}
+        //  price: " "
+        
+        return Object.entries(this.state.orders).map(order => {
+            return (
+                <Order 
+                key={order[0].key}
+                price={order[1].price}
+                ingredients={order[1].ingredients} />
+            )
+        })
     }
     
     render() { 
@@ -37,10 +53,7 @@ class Orders extends Component {
         // of course should be fetched from the backend.
         return ( 
         <div>
-            {this.state.orders.map(orders => (
-                // Do this: price={+order.price} so the toFixed(2) will work in Order.js
-                <Order key={orders.id} ingredients={orders.ingredients} price={orders.price}/>
-            ))}
+          {this.ordersMethod()}
         </div> 
         );
     }
