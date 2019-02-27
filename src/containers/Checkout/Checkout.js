@@ -44,9 +44,11 @@ class Checkout extends Component {
 
     checkoutContinuedHandler = () => {
         this.props.history.replace( '/checkout/contact-data' );
+        
     }
 
     render() { 
+console.log('this.props: ' + this.props);
 
         return ( 
             <div>
@@ -61,6 +63,7 @@ class Checkout extends Component {
                 ingredients={this.state.ingredients} 
                 price={this.state.totalPrice}
                 {...props}/>} />
+                
         </div>
          );
     }

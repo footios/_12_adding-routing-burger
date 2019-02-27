@@ -4,7 +4,9 @@ import { Route, Switch } from 'react-router-dom'
 import Layout from "./hoc/Layout/Layout";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import Checkout from './containers/Checkout/Checkout'
-// We'll load Checkout with Router later...
+import Orders from './containers/Orders/Orders'
+
+
 class App extends Component {
   render() {
     return (
@@ -14,6 +16,7 @@ class App extends Component {
             {/* With just 'exact' the order doesn't matter, but with Switch it does! */}
             {/* The 'exact' in the Route with path='/checkout' was preventing the ContactData to render */}
             <Route path='/checkout' component={Checkout} />
+            <Route path='/orders' component={Orders} />
             <Route path='/' exact component={BurgerBuilder} />
           </Switch>
         </Layout>

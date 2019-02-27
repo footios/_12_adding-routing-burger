@@ -92,6 +92,8 @@ class BurgerBuilder extends Component {
 
   purchaseContinueHandler = () => {
     // alert("You continue!");
+    console.log('in purchase...' + this.props);
+    
 
     const queryParams = []
     // get the ingredients and store them in an array
