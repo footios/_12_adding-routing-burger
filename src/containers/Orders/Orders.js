@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Order from '../../components/Order/Order'
 import axios from "../../axios-orders";
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
+//import Order from '../../components/Order/Order';
 
 class Orders extends Component {
     state = { 
@@ -36,8 +37,10 @@ class Orders extends Component {
         // of course should be fetched from the backend.
         return ( 
         <div>
-            <Order />
-            <Order />
+            {this.state.orders.map(orders => (
+                // Do this: price={+order.price} so the toFixed(2) will work in Order.js
+                <Order key={orders.id} ingredients={orders.ingredients} price={orders.price}/>
+            ))}
         </div> 
         );
     }

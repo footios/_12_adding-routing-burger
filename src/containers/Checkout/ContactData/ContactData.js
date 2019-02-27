@@ -7,7 +7,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner'
 
 import classes from './ContactData.module.css';
 
-
+//child of Checkout
 class ContactData extends Component {
     state = {
         name: '',
@@ -36,8 +36,8 @@ class ContactData extends Component {
         // Note: In real world apps, you wouldn't do the calculation on the page,
         // but on the server. Otherwise the client could manipulate them.
         const order = {
-        ingredinets: this.state.ingredients,
-        price: this.state.totalPrice,
+        ingredients: this.props.ingredients,
+        price: this.props.price,
         customer: {
             name: "Foti",
             address: {
