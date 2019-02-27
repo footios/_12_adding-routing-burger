@@ -45,7 +45,7 @@ class ContactData extends Component {
             zipCode: "2356",
             country: "Greece"
             },
-            email: "test@otest.com"
+            email: "test@ote.com"
         },
         deliveryMethod: "fastest"
         };
@@ -56,7 +56,7 @@ class ContactData extends Component {
         .then(response => this.setState({ loading: false}))
         .then(error => this.setState({ loading: false}));
         // In order to Redirect when we click the ORDER button,
-        // we could use the 'this.props.history.push('/')
+        // we can use the 'this.props.history.push('/')
         // But, in the Checkout we use the 'render' method
         // and not the 'component' to load the ContactData,
         // so now we don't have '...history' object!
