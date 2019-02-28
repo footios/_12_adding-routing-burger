@@ -20,6 +20,8 @@ class Checkout extends Component {
     // get an error. We need to parse the ingredients before it mounts,
     // because otherwise the component will try to render with null ingredients...
     componentWillMount() {
+        console.log('Checkout cwm: ', this.props);
+        
         const query = new URLSearchParams(this.props.location.search)
         const ingredients = {}
         let price = 0
@@ -35,6 +37,8 @@ class Checkout extends Component {
         // Because we save the ingredients to state. They will not change if we change the address
         // (if the query params get lost)
         // by going to 'chekout/contact-data'
+        console.log('Checkout cwm: ', ingredients, ' ', price);
+        
         this.setState({ingredients: ingredients, totalPrice: price})
     }
 
@@ -48,8 +52,6 @@ class Checkout extends Component {
     }
 
     render() { 
-console.log('this.props: ' + this.props);
-
         return ( 
             <div>
             <CheckoutSummary
