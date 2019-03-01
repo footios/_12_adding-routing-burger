@@ -7,6 +7,18 @@ import Spinner from '../../../components/UI/Spinner/Spinner'
 
 import classes from './ContactData.module.css';
 
+// Maybe it's not working...
+// https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/scroll-restoration.md
+class ScrollToTopOnMount extends Component {
+    componentDidMount() {
+      window.scrollTo(0, 0);
+    }
+  
+    render() {
+      return null;
+    }
+  }
+
 //child of Checkout
 class ContactData extends Component {
     state = {
@@ -83,6 +95,7 @@ class ContactData extends Component {
         }
         return ( 
             <div className={classes.ContactData}>
+            <ScrollToTopOnMount />
                 <h4>Enter your Contact Data</h4>
                  {form}
             </div>
