@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
+import ScrollToTop from './ScrollToTop';
 
 import './index.css';
 import App from './App';
@@ -8,8 +9,12 @@ import * as serviceWorker from './serviceWorker';
 
 // Note curly braces didn't work!
 const app = (
-    <BrowserRouter><App /></BrowserRouter>
-)
+	<BrowserRouter>
+		<ScrollToTop>
+			<App />
+		</ScrollToTop>
+	</BrowserRouter>
+);
 
 ReactDOM.render(app, document.getElementById('root'));
 
