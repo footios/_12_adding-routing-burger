@@ -8,8 +8,6 @@ import ContactData from './ContactData/ContactData'
 class Checkout extends Component {
 
     state = { 
-        // dummy data
-        // we will pass the real from BurgerBuilder with Routing...
         ingredients: null,
         totalPrice: 0
      }
@@ -24,20 +22,19 @@ class Checkout extends Component {
         
         const query = new URLSearchParams(this.props.location.search)
         const ingredients = {}
-        let price = 0
+        let price = this.props.location.state
         for (const param of query.entries()) {
             // ['salad', '1']
-            // This is a workaround to get the price, i.e. temporary...
-            if (param[0] === 'price') {
-                price = param[1]
-            } else {
-                ingredients[param[0]] = +param[1]
-            }
+          ingredients[param[0]] = +param[1]
+            console.log('ingredients[param[0]]' , param );
+            console.log(' +param[1]',  +param[1]);
+            
         }
-        // Because we save the ingredients to state. They will not change if we change the address
-        // (if the query params get lost)
-        // by going to 'chekout/contact-data'
-        console.log('Checkout cwm: ', ingredients, ' ', price);
+       
+        
+        console.log('Checkout hash: ', this.props.location.hash);
+        console.log('Checkout cwm ingredients: ', ingredients);
+        console.log('Checkout price: ', this.props.location.state);
         
         this.setState({ingredients: ingredients, totalPrice: price})
     }

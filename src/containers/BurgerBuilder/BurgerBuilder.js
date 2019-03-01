@@ -18,7 +18,7 @@ const INGREDIENT_PRICES = {
 class BurgerBuilder extends Component {
   state = {
     //object of ingredients
-    ingredients: null,
+    ingredients: [],
     totalPrice: 4,
     purchasable: false,
     purchasing: false,
@@ -91,9 +91,6 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
-    // alert("You continue!");
-    
-    
     const queryParams = []
     // get the ingredients and store them in an array
     for (const i in this.state.ingredients) {
@@ -101,15 +98,15 @@ class BurgerBuilder extends Component {
         queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
       }
     }
-    // We need the price for the Checkout. So we push it here:
-    queryParams.push('price=' + this.state.totalPrice)
-    // save the ingredients as a string and pass assing it to the search query
+   
+    //save the ingredients as a string and pass assing it to the search query
     const queryString = queryParams.join('&')
     this.props.history.push({
       pathname: '/checkout',
-      search: '?' + queryString 
+      search: '?' + queryString, 
+      state: this.state.totalPrice 
     })
-    console.log('BuirgerBuilder in purchase...' + this.props);
+    console.log('BurgerBuilder in purchase...' + this.props);
   };
 
   render() {
