@@ -27,9 +27,11 @@ const order = (props) => {
 		);
 	});
 
-	return (
+	return (		
 		<div className={classes.Order}>
+			<p> Hey {props.name}, thank you for your order!</p>
 			<p>Ingredients: {indredientOutput} </p>
+			<p>DeliveryMethod: {props.delivery} </p>
 			{/* Use Number.parseFloat() to convert the string to a number...
         or use a '+' where you load the <Order /> in the Orders.js */}
 

@@ -16,14 +16,17 @@ class Orders extends Component {
 		axios
 			.get('/orders.json')
 			.then((res) => {
-				console.log('Orders: ', res.data); // Why is 'data' what we get back from Firebase?
+				// console.log('Orders: ', res.data);
 				//convert the object into an array:
 				const fetchedOrders = [];
 				for (const key in res.data) {
+					// console.log('key ', key)
+					// console.log('res.data[key] ', res.data[key])
 					if (res.data.hasOwnProperty(key)) {
 						fetchedOrders.push({ ...res.data[key], id: key });
 					}
 				}
+				console.log('fetchedOrders ', fetchedOrders);
 				this.setState({ loading: false, orders: fetchedOrders });
 			})
 			.catch((err) => {
@@ -39,7 +42,13 @@ class Orders extends Component {
 			<div>
 				{this.state.orders.map((orders) => (
 					// Do this: price={+order.price} so the toFixed(2) will work in Order.js
-					<Order key={orders.id} ingredients={orders.ingredients} price={orders.price} />
+					<Order
+						key={orders.id}
+						ingredients={orders.ingredients}
+						price={orders.price}
+						delivery={orders.deliveryMethod}
+						name={orders.customer.name}
+					/>
 				))}
 			</div>
 		);

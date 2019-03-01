@@ -37,17 +37,17 @@ class Checkout extends Component {
         for (const param of query.entries()) {
             // ['salad', '1']
             ingredients[param[0]] = +param[1]
-            console.log('param' , param );
-            console.log(' +param[1]',  +param[1]);
-            console.log(' param[0]',  param[0]);
+            // console.log('param' , param );
+            // console.log(' +param[1]',  +param[1]);
+            // console.log(' param[0]',  param[0]);
             
         }
         let price = this.props.location.state
        
         
-        console.log('Checkout hash: ', this.props.location.hash);
-        console.log('Checkout cwm ingredients: ', ingredients);
-        console.log('Checkout price: ', this.props.location.state);
+        // console.log('Checkout hash: ', this.props.location.hash);
+        // console.log('Checkout cwm ingredients: ', ingredients);
+        // console.log('Checkout price: ', this.props.location.state);
         
         this.setState({ingredients: ingredients, totalPrice: price})
     }
