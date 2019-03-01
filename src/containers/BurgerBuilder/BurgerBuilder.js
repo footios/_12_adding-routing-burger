@@ -98,15 +98,18 @@ class BurgerBuilder extends Component {
         queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
       }
     }
-   
+
+    // const queryParams = Object.entries(this.state.ingredients).join('').replace(/,/g,'')
+    // console.log('queryParams ' + queryParams);
+    
     //save the ingredients as a string and pass assing it to the search query
     const queryString = queryParams.join('&')
+    console.log('queryString ' + queryString);
     this.props.history.push({
       pathname: '/checkout',
       search: '?' + queryString, 
       state: this.state.totalPrice 
     })
-    console.log('BurgerBuilder in purchase...' + this.props);
   };
 
   render() {

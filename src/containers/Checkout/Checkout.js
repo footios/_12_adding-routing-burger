@@ -19,17 +19,30 @@ class Checkout extends Component {
     // because otherwise the component will try to render with null ingredients...
     componentWillMount() {
         console.log('Checkout cwm: ', this.props);
+        // const numberPattern = /\d+/g;
+        // const ingredients = this.props.location.search.replace('?','').split(numberPattern)
+        // console.log('ingredients ', ingredients);
+        // // const ingredients = JSON.parse()
+        
+        // let price = this.props.location.state
+        
+        
+        // let price = this.props.location.search
+        // let ingredients = this.props.location.state
+        // console.log('ingredients ', ingredients);
+        // console.log('price ', price);
         
         const query = new URLSearchParams(this.props.location.search)
         const ingredients = {}
-        let price = this.props.location.state
         for (const param of query.entries()) {
             // ['salad', '1']
-          ingredients[param[0]] = +param[1]
-            console.log('ingredients[param[0]]' , param );
+            ingredients[param[0]] = +param[1]
+            console.log('param' , param );
             console.log(' +param[1]',  +param[1]);
+            console.log(' param[0]',  param[0]);
             
         }
+        let price = this.props.location.state
        
         
         console.log('Checkout hash: ', this.props.location.hash);
