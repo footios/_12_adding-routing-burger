@@ -12,10 +12,12 @@ const navigationItem = props => {
   // we need to use 'activeClassName' because otherwise,
   // css modules will convert the className into a unique className.
 
-  // In order to have only one link shown as active we need to use 'exact'.
-  // If we use it like it is here, it will do the job, 
+  // In order to have only Burger Builder shown as active in first load, we need to use 'exact'.
+  // If we use it like it is here, 
+  //  <NavLink to={props.link} exact activeClassName={classes.active}>
+  // it will do the job, 
   // but it will attach it to all NavLinks.
-  // To fix this, we pass 'exact' in 'NavigationItems.js' as a property,
+  // To fix this, we pass 'exact' in 'NavigationItems.js'... as a property,
   // and then here we can use that prop...
   return (
     <li className={classes.NavigationItem}>
