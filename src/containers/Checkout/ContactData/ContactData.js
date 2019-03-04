@@ -72,19 +72,19 @@ class ContactData extends Component {
 	};
 
 	orderHandler = (event) => {
-		// Because in Checkout we pass the ingredients as props:
-		// render={(props) => <ContactData ingredients={this.state.ingredients} />} />
-		// we can now access them here.
-
-		// 'preventDefault()' prevents the default which is to send a request which I don't want.
-		// I don't want to send a request because this reloads my form.
 		event.preventDefault();
 		console.log('in orderHandler: ', this.props);
-
+		const formData = {};
+		for (const orderFormIdentifier in this.state.orderForm) {
+			if (this.state.orderForm.hasOwnProperty(orderFormIdentifier)) {
+				 formData[orderFormIdentifier] = this.state.orderForm[orderFormIdentifier].value;
+			}
+		}
 		this.setState({ loading: true });
 		const order = {
 			ingredients: this.props.ingredients,
-			price: this.props.price
+			price: this.props.price,
+			orderData: formData
 		};
 
 		axios
@@ -119,7 +119,7 @@ class ContactData extends Component {
 			}
 		}
 		let form = (
-			<form>
+			<form onSubmit={this.orderHandler}>
 				{formElementsArray.map((formElement) => (
 					<Input
                         key={formElement.id}
@@ -129,7 +129,7 @@ class ContactData extends Component {
 						changed={(event) => this.inputchangeHandler(event, formElement.id)}
 					/>
 				))}
-				<Button btnType="Success" clicked={this.orderHandler}>
+				<Button btnType="Success" >
 					ORDER
 				</Button>
 			</form>
