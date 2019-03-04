@@ -7,16 +7,11 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 
 import classes from './ContactData.module.css';
-import input from '../../../components/UI/Input/Input';
 
 //child of Checkout
 class ContactData extends Component {
 	state = {
 		orderForm: {
-			/* And you could of course write a bit
-            leaner code, you could create a helper function 
-            which creates such a javascript object so that here
-            you call just a function which initializes it. */
 			name: {
 				elementType: 'input',
 				elementConfig: {
@@ -27,6 +22,7 @@ class ContactData extends Component {
 				validation: {
 					required: true
 				},
+				touched: false,
 				valid: false,
 			},
 			street: {
@@ -39,6 +35,7 @@ class ContactData extends Component {
 				validation: {
 					required: true
 				},
+				touched: false,
 				valid: false,
 			},
 			zipCode: {
@@ -53,6 +50,7 @@ class ContactData extends Component {
 					minLength: 5,
 					maxLength: 5
 				},
+				touched: false,
 				valid: false,
 			},
 			country: {
@@ -65,6 +63,7 @@ class ContactData extends Component {
 				validation: {
 					required: true
 				},
+				touched: false,
 				valid: false,
 			},
 			email: {
@@ -77,6 +76,7 @@ class ContactData extends Component {
 				validation: {
 					required: true
 				},
+				touched: false,
 				valid: false,
 			},
 			deliveryMethod: {
@@ -146,6 +146,7 @@ class ContactData extends Component {
 		const rules = updatedFormElement.validation
 		updatedFormElement.valid = this.checkValidity(updatedFormElement.value, rules);
 		updatedOrderForm[inputIdentifier] = updatedFormElement
+		updatedFormElement.touched = true;
 		console.log(updatedFormElement);
 		
 		this.setState({orderForm: updatedOrderForm})
@@ -169,6 +170,8 @@ class ContactData extends Component {
 						elementType={formElement.config.elementType}
 						elementConfig={formElement.config.elementConfig}
 						value={formElement.config.value}
+						inValid={!formElement.config.valid}
+						touched={formElement.config.touched}
 						changed={(event) => this.inputchangeHandler(event, formElement.id)}
 					/>
 				))}

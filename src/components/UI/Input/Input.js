@@ -4,12 +4,17 @@ import classes from './Input.module.css';
 
 const input = (props) => {
 	let inputElement = null;
+	const inputClasses = [classes.InputElement];
+
+	if (props.inValid && props.touched) {
+		inputClasses.push(classes.Invalid)
+	}
 
 	switch (props.elementType) {
 		case 'input':
 			inputElement = (
 				<input
-					className={classes.InputElement}
+					className={inputClasses.join(' ')}
 					{...props.elementConfig}
 					value={props.value}
 					onChange={props.changed}
@@ -19,7 +24,7 @@ const input = (props) => {
 		case 'textarea':
 			inputElement = (
 				<textarea
-					className={classes.InputElement}
+					className={inputClasses.join(' ')}
 					{...props.elementConfig}
 					value={props.value}
 					onChange={props.changed}
@@ -27,7 +32,7 @@ const input = (props) => {
 			); // selfclosing element in React
 			break;
 		case 'select':
-			inputElement = (
+			inputElement = ( // or maybe just: classes.InputElement
 				<select className={classes.InputElement} value={props.value} onChange={props.changed}>
 					{props.elementConfig.options.map((option) => (
 						<option key={option.value} defaultValue={option.value}>
@@ -40,7 +45,7 @@ const input = (props) => {
 		default:
 			inputElement = (
 				<input
-					className={classes.InputElement}
+					className={inputClasses.join(' ')} 
 					{...props.elementConfig}
 					value={props.value}
 					onChange={props.changed}
