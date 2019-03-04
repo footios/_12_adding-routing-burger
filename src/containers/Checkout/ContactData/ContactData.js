@@ -87,7 +87,7 @@ class ContactData extends Component {
                         {value: 'cheapest', displayValue: 'cheapest'}
                     ]
                 },
-				value: '',
+				value: 'fastest', // we fix this later
 				valid: true, // needed for formIsValid...
 				validation: {} // no need validation
             }
