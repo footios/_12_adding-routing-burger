@@ -7,6 +7,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 
 import classes from './ContactData.module.css';
+import input from '../../../components/UI/Input/Input';
 
 //child of Checkout
 class ContactData extends Component {
@@ -20,7 +21,7 @@ class ContactData extends Component {
 				elementType: 'input',
 				elementConfig: {
 					type: 'text',
-					placeholder: 'Name'
+					placeholder: 'name'
 				},
 				value: ''
 			},
@@ -28,7 +29,7 @@ class ContactData extends Component {
 				elementType: 'input',
 				elementConfig: {
 					type: 'text',
-					placeholder: 'Street'
+					placeholder: 'street'
 				},
 				value: ''
 			},
@@ -44,7 +45,7 @@ class ContactData extends Component {
 				elementType: 'input',
 				elementConfig: {
 					type: 'text',
-					placeholder: 'Country'
+					placeholder: 'country'
 				},
 				value: ''
 			},
@@ -60,8 +61,8 @@ class ContactData extends Component {
                 elementType: 'select',
                 elementConfig: {
                     options: [
-                        {value: 'fastest', displayValue: 'Fastest'},
-                        {value: 'cheapest', displayValue: 'Cheapest'}
+                        {value: 'fastest', displayValue: 'fastest'},
+                        {value: 'cheapest', displayValue: 'cheapest'}
                     ]
                 },
                 value: ''
@@ -90,8 +91,23 @@ class ContactData extends Component {
 			.post('/orders.json', order)
 			.then((response) => this.setState({ loading: false }))
 			.then((error) => this.setState({ loading: false }));
+
 		this.props.history.push('/');
 	};
+
+	
+	inputchangeHandler = (event, inputIdentifier) => {
+		const updatedOrderForm = {
+			...this.state.orderForm
+		}
+		const updatedFormElement = {
+			...updatedOrderForm[inputIdentifier] 
+		}
+		updatedFormElement.value = event.target.value 
+		updatedOrderForm[inputIdentifier] = updatedFormElement
+		this.setState({orderForm: updatedOrderForm})
+	}
+
 	render() {
 		const formElementsArray = [];
 		for (const key in this.state.orderForm) {
@@ -110,6 +126,7 @@ class ContactData extends Component {
 						elementType={formElement.config.elementType}
 						elementConfig={formElement.config.elementConfig}
 						value={formElement.config.value}
+						changed={(event) => this.inputchangeHandler(event, formElement.id)}
 					/>
 				))}
 				<Button btnType="Success" clicked={this.orderHandler}>
