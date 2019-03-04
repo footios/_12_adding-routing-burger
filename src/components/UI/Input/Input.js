@@ -12,12 +12,19 @@ const input = (props) => {
     So for any default html attributes I want to set on my input,
     I will only need to set the 'inputtype' prop 
     and then pass the normal attributes */
-	switch (props.elemetType) {
-		case 'input':
+	switch (props.elementType) {
+		case ('input'):
 			inputElement = <input className={classes.InputElement} {...props.elementConfig} value={props.value} />;
 			break;
-		case 'textarea':
+		case ('textarea'):
 			inputElement = <textarea className={classes.InputElement} {...props.elementConfig} value={props.value} />; // selfclosing element in React
+			break;
+		case ('select'):
+			inputElement = <select className={classes.InputElement} value={props.value}> 
+					{props.elementConfig.options.map(option => (
+						<option key={option.value} defaultValue={option.value}>{option.displayValue}</option>
+					))}
+				</select> ; 
 			break;
 		default:
 			inputElement = <input className={classes.InputElement} {...props.elementConfig} value={props.value} />;

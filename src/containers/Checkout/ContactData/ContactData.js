@@ -12,62 +12,62 @@ import classes from './ContactData.module.css';
 class ContactData extends Component {
 	state = {
 		orderForm: {
-            /* And you could of course write a bit
+			/* And you could of course write a bit
             leaner code, you could create a helper function 
             which creates such a javascript object so that here
             you call just a function which initializes it. */
-                name: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'Your name'
-                    },
-                    value: ''
+			name: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Name'
+				},
+				value: ''
+			},
+			street: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Street'
+				},
+				value: ''
+			},
+			zipCode: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'zip code'
+				},
+				value: ''
+			},
+			country: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'Country'
+				},
+				value: ''
+			},
+			email: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'email',
+					placeholder: 'e-mail'
+				},
+				value: ''
+			},
+			deliveryMethod: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {value: 'fastest', displayValue: 'Fastest'},
+                        {value: 'cheapest', displayValue: 'Cheapest'}
+                    ]
                 },
-                street: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'Street'
-                    },
-                    value: ''
-                },
-                zipCode: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'zip code'
-                    },
-                    value: ''
-                },
-                country: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'text',
-                        placeholder: 'Country'
-                    },
-                    value: ''
-                },
-                email: {
-                    elementType: 'input',
-                    elementConfig: {
-                        type: 'email',
-                        placeholder: 'Your e-mail'
-                    },
-                    value: ''
-                },
-                deliveryMethod: {
-                    elementType: 'select',
-                    elementConfig: {
-                        options: [
-                            {value: 'fastest', displayValue: 'Fastest'},
-                            {value: 'cheapest', displayValue: 'Cheapest'},
-                        ]
-                    },
-                    value: ''
-                },
-        },
-		loading: false 
+                value: ''
+            }
+		},
+		loading: false
 	};
 
 	orderHandler = (event) => {
@@ -78,8 +78,8 @@ class ContactData extends Component {
 		// 'preventDefault()' prevents the default which is to send a request which I don't want.
 		// I don't want to send a request because this reloads my form.
 		event.preventDefault();
-        console.log('in orderHandler: ', this.props);
-        
+		console.log('in orderHandler: ', this.props);
+
 		this.setState({ loading: true });
 		const order = {
 			ingredients: this.props.ingredients,
@@ -93,12 +93,25 @@ class ContactData extends Component {
 		this.props.history.push('/');
 	};
 	render() {
+		const formElementsArray = [];
+		for (const key in this.state.orderForm) {
+			if (this.state.orderForm.hasOwnProperty(key)) {
+				formElementsArray.push({
+					id: key,
+					config: this.state.orderForm[key]
+				});
+			}
+		}
 		let form = (
 			<form>
-				<Input elementType='...' elementConfig='...' value='...' />
-				<Input inputtype="input" type="text" name="postal" placeholder="Postal Code" />
-				<Input inputtype="input" type="email" name="email" placeholder="Your Mail" />
-				<Input inputtype="input" type="text" name="name" placeholder="Your Name" />
+				{formElementsArray.map((formElement) => (
+					<Input
+                        key={formElement.id}
+						elementType={formElement.config.elementType}
+						elementConfig={formElement.config.elementConfig}
+						value={formElement.config.value}
+					/>
+				))}
 				<Button btnType="Success" clicked={this.orderHandler}>
 					ORDER
 				</Button>
