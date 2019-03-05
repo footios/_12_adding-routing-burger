@@ -15,7 +15,9 @@ implements it with a shallow prop and state comparison.
 
 If your React component’s render() function renders the same result 
 given the same props and state, you can use React.PureComponent 
-for a performance boost in some cases. */
+for a performance boost in some cases. 
+https://reactjs.org/docs/react-api.html#reactpurecomponent
+*/
 
 //child of Checkout
 class ContactData extends PureComponent {
