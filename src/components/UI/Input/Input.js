@@ -26,12 +26,11 @@ const input = (props) => {
 				<div>
 					<input
 						className={inputClasses.join(' ')}
-						{...props.elementConfig} // very interesting!!!
 						value={props.value}
 						onChange={props.changed}
 					/> 
 					{props.elementConfig.options.map(option => (
-						 <label for={option.id}>{option.displayValue}</label>
+						 <label key={option.id} for={option.id}>{option.displayValue}</label>
 					))}
 				</div>
 			);
