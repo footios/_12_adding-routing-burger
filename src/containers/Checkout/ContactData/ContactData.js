@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import axios from '../../../axios-orders';
 
@@ -8,8 +8,17 @@ import Input from '../../../components/UI/Input/Input';
 
 import classes from './ContactData.module.css';
 
+/* React.PureComponent is similar to React.Component. 
+The difference between them is that React.Component 
+doesn’t implement shouldComponentUpdate(), but React.PureComponent 
+implements it with a shallow prop and state comparison.
+
+If your React component’s render() function renders the same result 
+given the same props and state, you can use React.PureComponent 
+for a performance boost in some cases. */
+
 //child of Checkout
-class ContactData extends Component {
+class ContactData extends PureComponent {
 	state = {
 		orderForm: {
 			name: {
@@ -161,7 +170,7 @@ class ContactData extends Component {
 	}
 	
 	inputchangeHandler = (event, inputIdentifier) => {
-		const updatedOrderForm = JSON.parse(JSON.stringify(this.state.orderForm))
+		const updatedOrderForm = JSON.parse(JSON.stringify(this.state.orderForm)) // note, this is slow!
 		let updatedFormElement = updatedOrderForm[inputIdentifier]
 
 		updatedFormElement.value = event.target.value 
