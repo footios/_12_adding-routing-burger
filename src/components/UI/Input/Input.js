@@ -15,12 +15,27 @@ const input = (props) => {
 			inputElement = (
 				<input
 					className={inputClasses.join(' ')}
-					{...props.elementConfig}
+					{...props.elementConfig} // very interesting!!!
 					value={props.value}
 					onChange={props.changed}
 				/>
 			);
 			break;
+		case 'checkbox':
+			inputElement = (
+				<div>
+					<input
+						className={inputClasses.join(' ')}
+						{...props.elementConfig} // very interesting!!!
+						value={props.value}
+						onChange={props.changed}
+					/> 
+					{props.elementConfig.options.map(option => (
+						 <label for={option.id}>{option.displayValue}</label>
+					))}
+				</div>
+			);
+			break;	
 		case 'textarea':
 			inputElement = (
 				<textarea

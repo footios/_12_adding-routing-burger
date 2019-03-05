@@ -90,7 +90,23 @@ class ContactData extends Component {
 				value: 'fastest', // we fix this later
 				valid: true, // needed for formIsValid...
 				validation: {} // no need validation
-            }
+			},
+			deliveryVehicle: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'checkbox',
+					options: [
+						{id: 'car', displayValue: 'Car' },
+                        {id: 'scooter', displayValue: 'Scooter'}
+					]
+				},
+				value: '',
+				validation: {
+					required: true
+				},
+				touched: false,
+				valid: false,
+			},
 		},
 		formIsValid: false,
 		loading: false
