@@ -91,22 +91,22 @@ class ContactData extends Component {
 				valid: true, // needed for formIsValid...
 				validation: {} // no need validation
 			},
-			deliveryVehicle: {
-				elementType: 'input',
-				elementConfig: {
-					type: 'checkbox',
-					options: [
-						{id: 'car', displayValue: 'Car' },
-                        {id: 'scooter', displayValue: 'Scooter'}
-					]
-				},
-				value: '',
-				validation: {
-					required: true
-				},
-				touched: false,
-				valid: false,
-			},
+			// deliveryVehicle: {
+			// 	elementType: 'input',
+			// 	elementConfig: {
+			// 		type: 'checkbox',
+			// 		options: [
+			// 			{id: 'car', displayValue: 'Car' },
+            //             {id: 'scooter', displayValue: 'Scooter'}
+			// 		]
+			// 	},
+			// 	value: '',
+			// 	validation: {
+			// 		required: true
+			// 	},
+			// 	touched: false,
+			// 	valid: false,
+			// },
 		},
 		formIsValid: false,
 		loading: false
@@ -161,12 +161,9 @@ class ContactData extends Component {
 	}
 	
 	inputchangeHandler = (event, inputIdentifier) => {
-		const updatedOrderForm = {
-			...this.state.orderForm
-		}
-		const updatedFormElement = {
-			...updatedOrderForm[inputIdentifier] 
-		}
+		const updatedOrderForm = JSON.parse(JSON.stringify(this.state.orderForm))
+		let updatedFormElement = updatedOrderForm[inputIdentifier]
+
 		updatedFormElement.value = event.target.value 
 		const rules = updatedFormElement.validation
 		updatedFormElement.valid = this.checkValidity(updatedFormElement.value, rules);
