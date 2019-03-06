@@ -64,6 +64,21 @@ class ContactData extends PureComponent {
 				touched: false,
 				valid: false,
 			},
+			phone: {
+				elementType: 'input',
+				elementConfig: {
+					type: 'text',
+					placeholder: 'phone-number'
+				},
+				value: '',
+				validation: {
+					required: true,
+					minLength: 1,
+					maxLength: 1
+				},
+				touched: false,
+				valid: false,
+			},
 			country: {
 				elementType: 'input',
 				elementConfig: {
@@ -147,17 +162,17 @@ class ContactData extends PureComponent {
 		this.props.history.push('/');
 	};
 
-	checkValidity(value, rules) {
+	checkValidity(value, rules, inputIdentifier) {
 		let isValid = true;
 		
-		// alternative option for validation select...
-		// not needed!
-		// if(!rules) {
-		// 	return true;
-		// }
-
 		if (rules.required) {
 			isValid = value.trim() !== '' && isValid;
+		}
+
+		if(inputIdentifier === 'phone') {
+			isValid = value.trim() !== '' 
+			&& !isNaN(value)
+			&& isValid
 		}
 		
 		if (rules.minLength) {
@@ -177,7 +192,7 @@ class ContactData extends PureComponent {
 
 		updatedFormElement.value = event.target.value 
 		const rules = updatedFormElement.validation
-		updatedFormElement.valid = this.checkValidity(updatedFormElement.value, rules);
+		updatedFormElement.valid = this.checkValidity(updatedFormElement.value, rules, inputIdentifier);
 		updatedOrderForm[inputIdentifier] = updatedFormElement
 		updatedFormElement.touched = true;
 		
